@@ -245,4 +245,13 @@ values
 
 SELECT * FROM MOVIES;
 
+.print ""
+.print "Top Cast"
+.print "========"
+.print ""
+
+---- SELECT movie_name
+-- FROM movies
+-- INNER JOIN topcasts ON movie_id.topcasts = movie_id.movies;
+
 
