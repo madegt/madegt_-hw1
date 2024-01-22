@@ -133,35 +133,116 @@
 
 -- 0) Set workspace + drop tables if they exist
 --gitpod /workspace/madegt_-hw1 (main) $ sqlite3 kmdb.sqlite3
-
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS stars;
-DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS characters;
+DROP TABLE IF EXISTS topcasts;
 
--- 1) Make tables: I will have 3, all linked by the movie ID (key). 
-
+-- 1) Make tables: 
 -- Table1: Movies
-
 CREATE TABLE movies(
   movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
   movie_name TEXT,
-  studio_id INTEGER,
   year_release INTEGER,
-  movie_MPAArating TEXT
+  movie_MPAArating TEXT,
+   studio_name text
 );
 
--- Table2: stars
-CREATE TABLE stars(
-star_id INTEGER PRIMARY KEY AUTOINCREMENT,
-movie_id INTEGER,
+-- Table2: characters
+CREATE TABLE characters(
+character_id INTEGER PRIMARY KEY AUTOINCREMENT,
 star_fullname TEXT,
 character_name TEXT)
 ;
 
---- Table 3: studios 
+--- Table 3: topcasts = Link btw movies and stars
+CREATE TABLE topcasts(
+  id_mr integer primary key AUTOINCREMENT,
+movie_id INTEGER,
+character_id INTEGER);
 
-CREATE TABLE studios(
-studio_id INTEGER PRIMARY KEY AUTOINCREMENT,
-studio_name TEXT,
-movie_id INTEGER)
-;
+---2) Complete tables
+--Complete table1
+
+INSERT INTO movies 
+( movie_name,
+  year_release,
+  movie_MPAArating,
+  studio_name
+)
+values (
+    'Batman Begins',
+    2005,
+    'PG-13',
+    'Warner Bros.'),
+    (
+ 'The Dark Knight',
+    2008,
+    'PG-13',
+    'Warner Bros.'),
+ ('The Dark Knight Rises',
+   2012,
+    'PG-13',
+    'Warner Bros.');
+
+--Complete table2
+INSERT INTO characters
+( star_fullname,
+  character_name
+)
+values (
+    'Christian Bale',
+    'Bruce Wayne'),
+    ('Michael Caine',
+      'Alfred' ),
+    ('Liam Neeson',
+    'Ras Al Ghul'),
+    ('Katie Holmes',
+    'Rachel Dawes'),
+    ('Gary Oldman',
+    'Comissioner Gordon'),
+    ('Heath Ledger',
+    'Joker'),
+    ('Aaron Eckhart',
+    'Harvey Dent'),
+    ('Maggie Gyllenhaal', 
+    'Rachel Dawes'),
+    ('Tom Hardy',
+    'Bane'),
+    ('Joseph Gordon-Levitt',
+    'John Blake'),
+    ('Anne Hathaway',
+    'Selina Kyle');
+
+--Complete table3: the link!
+INSERT INTO topcasts
+( movie_id,
+character_id
+)
+values 
+(1,1),
+(1,2),
+(1,3),
+(1,4),
+(1,5),
+(2,1),
+(2,6),
+(2,7),
+(2,2),
+(2,8),
+(3,1),
+(3,5),
+(3,9),
+(3,10),
+(3,11);
+
+--3) Reporting 
+.headers on
+.mode columns
+
+.print "Movies"
+.print "======"
+.print ""
+
+SELECT * FROM MOVIES;
+
+
