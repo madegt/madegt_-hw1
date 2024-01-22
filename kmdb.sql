@@ -114,19 +114,54 @@
 -- TODO!
 
 -- Prints a header for the movies output
-.print "Movies"
-.print "======"
-.print ""
+--.print "Movies"
+--.print "======"
+--.print ""
 
 -- The SQL statement for the movies output
 -- TODO!
 
 -- Prints a header for the cast output
-.print ""
-.print "Top Cast"
-.print "========"
-.print ""
+--.print ""
+--.print "Top Cast"
+--.print "========"
+--.print ""
 
 
 -- The SQL statement for the cast output
 -- TODO!
+
+-- 0) Set workspace + drop tables if they exist
+--gitpod /workspace/madegt_-hw1 (main) $ sqlite3 kmdb.sqlite3
+
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS stars;
+DROP TABLE IF EXISTS studios;
+
+-- 1) Make tables: I will have 3, all linked by the movie ID (key). 
+
+-- Table1: Movies
+
+CREATE TABLE movies(
+  movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_name TEXT,
+  studio_id INTEGER,
+  year_release INTEGER,
+  movie_MPAArating TEXT
+);
+
+-- Table2: stars
+CREATE TABLE stars(
+star_id INTEGER PRIMARY KEY AUTOINCREMENT,
+movie_id INTEGER,
+star_fullname TEXT,
+character_name TEXT)
+;
+
+--- Table 3: studios 
+
+CREATE TABLE studios(
+studio_id INTEGER PRIMARY KEY AUTOINCREMENT,
+studio_name TEXT,
+movie_id INTEGER)
+;
