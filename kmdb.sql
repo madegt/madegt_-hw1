@@ -250,8 +250,9 @@ SELECT * FROM MOVIES;
 .print "========"
 .print ""
 
----- SELECT movie_name
--- FROM movies
--- INNER JOIN topcasts ON movie_id.topcasts = movie_id.movies;
 
+SELECT movies.movie_name, characters.star_fullname, characters.character_name
+FROM movies
+INNER JOIN topcasts ON topcasts.movie_id = movies.movie_id
+INNER JOIN characters ON topcasts.character_id = characters.character_id;
 
